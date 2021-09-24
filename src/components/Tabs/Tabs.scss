@@ -1,0 +1,25 @@
+$button: #4A4A4A;
+
+.tabs {
+  &-filter {
+
+  }
+  .btn-outline-primary {
+    padding: 15px;
+    background: #fff;
+    line-height: 20px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: $button;
+    font-weight: 600;
+    border-color: #DFE5EC;
+  }
+  .btn-outline-primary:hover {
+    color: #fff;
+    border-color: #2196F3;
+    background: #2196F3;
+  }
+}
+
+
