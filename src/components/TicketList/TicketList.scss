@@ -6,10 +6,24 @@ li {
   list-style: none;
 }
 
-.show-more {
-  text-transform: uppercase;
-  font-size: 12px;
-  line-height: 20px;
-  font-weight: 600;
-  margin-bottom: 50px;
+.ticket-list {
+  &-description {
+    line-height: 20px;
+    text-transform: uppercase;
+    color: tomato;
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center;
+  }
+  .show-more {
+    background: #2196F3;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 600;
+    margin-bottom: 50px;
+    border: none;
+    padding: 15px 20px;
+  }
 }

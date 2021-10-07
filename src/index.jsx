@@ -1,6 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from "./app/App";
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import AppContainer from './app/AppContainer'
 
 
-render(<App/>, document.querySelector('#root'));
+render(<Provider store={store}>
+    <AppContainer />
+  </Provider>,
+  document.querySelector('#root'));
