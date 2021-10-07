@@ -7,7 +7,9 @@ const SET_USER_ID = 'filter/SET_USER_ID';
 
 const SET_THE_CHEAPEST = 'filter/SET_THE_CHEAPEST';
 const SET_THE_FASTEST = 'filter/SET_THE_FASTEST';
-// const SET_OPTIMAL = 'SET_OPTIMAL';
+const SET_OPTIMAL = 'filter/SET_OPTIMAL';
+
+const SET_FETCHING = 'filter/SET_FETCHING';
 
 const initialState = {
   filter: {
@@ -18,6 +20,7 @@ const initialState = {
     threeTransfer: true,
   },
   tickets: [],
+  isFetching: false,
 };
 
 const filterReducer = (state = initialState, action) => {
@@ -85,14 +88,28 @@ const filterReducer = (state = initialState, action) => {
     case SET_THE_FASTEST:
       return {
         ...state,
-        tickets: [...state.tickets.sort((a, b) => {
+        tickets: [...state.tickets.sort((prev, next) => {
           const durationCount = ticket => ticket.segments[0].duration + ticket.segments[1].duration;
 
-          const durationA = durationCount(a);
-          const durationB = durationCount(b);
+          const durationA = durationCount(prev);
+          const durationB = durationCount(next);
 
           return durationA - durationB;
         })],
+      };
+    case SET_OPTIMAL:
+      return {
+        ...state,
+        tickets: [...state.tickets.sort((prev, next) =>
+          prev.price + prev.segments[0].duration + prev.segments[1].duration
+          -
+          (next.price + next.segments[0].duration + next.segments[1].duration),
+        )],
+      };
+    case SET_FETCHING:
+      return {
+        ...state,
+        isFetching: action.isFetching,
       };
     default:
       return state;
@@ -100,17 +117,22 @@ const filterReducer = (state = initialState, action) => {
 };
 
 const setTickets = tickets => ({ type: SET_TICKETS, tickets });
+const setFetching = isFetching => ({ type: SET_FETCHING, isFetching });
 
 export const setFilter = filter => ({ type: SET_FILTER, filter });
 export const setTheCheapest = () => ({ type: SET_THE_CHEAPEST });
 export const setTheFastest = () => ({ type: SET_THE_FASTEST });
+export const setOptimal = () => ({ type: SET_OPTIMAL });
 
 export const getAllTickets = () => dispatch => {
+  dispatch(setFetching(false))
 
   const allData = async (userId) => aviaTickets.getTickets(userId)
     .then(res => {
       dispatch(setTickets(res.tickets));
+      dispatch(setFetching(false))
       if (!res.stop) allData(userId);
+      dispatch(setFetching(true))
     })
     .catch(err => {
       if (err.response.status === 500) {

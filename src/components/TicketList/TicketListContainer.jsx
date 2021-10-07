@@ -5,6 +5,7 @@ const mapStateToProps = state => {
   return {
     tickets: state.filter.tickets,
     filter: state.filter.filter,
+    isFetching: state.filter.isFetching,
   }
 };
 

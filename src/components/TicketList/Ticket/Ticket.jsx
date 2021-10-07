@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {format} from 'date-fns';
 import './Ticket.scss';
+import uniqueId from 'lodash.uniqueid';
 
 const Ticket = props => {
   const { price, segments, carrier } = props;
+
   const flightDuration = (duration) => `${Math.trunc(duration / 60)}ч ${duration % 60}м`;
 
   return (
@@ -29,7 +31,7 @@ const Ticket = props => {
         <div className='col-4 pb-2'>
           <span className='ticket-info-heading'>{segments[0].stops.length} пересадки</span>
           <div className='ticket-info-time'>
-            <div className='ticket-info-time'>{segments[0].stops.map(item => <span style={{marginRight: 5}}>{item}</span>)}</div>
+            <div className='ticket-info-time'>{segments[0].stops.map(item => <span key={uniqueId()} style={{marginRight: 5}}>{item}</span>)}</div>
           </div>
         </div>
 
@@ -48,7 +50,7 @@ const Ticket = props => {
         </div>
         <div className='col-4 pb-2'>
           <span className='ticket-info-heading'>{segments[1].stops.length} пересадки</span>
-          <div className='ticket-info-time'>{segments[1].stops.map(item => <span style={{marginRight: 5}}>{item}</span>)}</div>
+          <div className='ticket-info-time'>{segments[1].stops.map(item => <span key={uniqueId()} style={{marginRight: 5}}>{item}</span>)}</div>
         </div>
       </div>
     </li>

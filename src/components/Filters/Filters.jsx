@@ -41,23 +41,29 @@ const Filters = props => {
         <h3>количество пересадок</h3>
         <ul role='article'>
           <li className='filter-item' onKeyDown={null}>
-            <Checkbox value='all' checked={filter.all} onChange={putEverything}>Все</Checkbox>
+            <Checkbox value='all' checked={filter.all} onChange={putEverything}>
+              Все
+            </Checkbox>
           </li>
           <li className='filter-item'>
-            <Checkbox value='noTransfer' checked={filter.noTransfer} onChange={chooseOne}>Без
-              пересадок</Checkbox>
+            <Checkbox value='noTransfer' checked={filter.noTransfer} onChange={chooseOne}>
+              Без пересадок
+            </Checkbox>
           </li>
           <li className='filter-item'>
-            <Checkbox value='oneTransfer' checked={filter.oneTransfer} onChange={chooseOne}>1
-              пересадка</Checkbox>
+            <Checkbox value='oneTransfer' checked={filter.oneTransfer} onChange={chooseOne}>
+              1 пересадка
+            </Checkbox>
           </li>
           <li className='filter-item'>
-            <Checkbox value='twoTransfer' checked={filter.twoTransfer} onChange={chooseOne}>2
-              пересадки</Checkbox>
+            <Checkbox value='twoTransfer' checked={filter.twoTransfer} onChange={chooseOne}>
+              2 пересадки
+            </Checkbox>
           </li>
           <li className='filter-item'>
-            <Checkbox value='threeTransfer' checked={filter.threeTransfer} onChange={chooseOne}>3
-              пересадки</Checkbox>
+            <Checkbox value='threeTransfer' checked={filter.threeTransfer} onChange={chooseOne}>
+              3 пересадки
+            </Checkbox>
           </li>
         </ul>
       </div>
@@ -68,7 +74,5 @@ const Filters = props => {
 Filters.propTypes = {
   setFilter: PropTypes.func.isRequired,
   filter: PropTypes.objectOf(PropTypes.bool).isRequired,
-  // getAllTickets: PropTypes.func.isRequired,
-  // userId: PropTypes.string.isRequired,
 }
 export default Filters;
